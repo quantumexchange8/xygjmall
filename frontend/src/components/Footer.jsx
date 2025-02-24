@@ -19,18 +19,18 @@ const Footer = () => {
               <NavLink to='/'>
                 <p>首页</p>
               </NavLink></li>
-            <li>
+            {/* <li>
               <NavLink to='/about'>
                 <p>关于</p>
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>订单</p>
             </li>
-            <li>
+            {/* <li>
               <NavLink to='/contact'>
                 <p>联系</p>
-              </NavLink></li>
+              </NavLink></li> */}
           </ul>
         </div>
       </div>
