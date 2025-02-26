@@ -59,15 +59,15 @@ const Orders = () => {
                     <p>{currency}{item.price}</p>
                     <p>数量: {item.quantity}</p>
                   </div>
-                  <p>总额:{currency} {item.price * item.quantity}.00</p>
-                  <p className='mt-1'>下单日期: <span className=' text-gray-400'>{new Date(item.date).toDateString()}</span></p>
-                  <p className='mt-1'>付款方式: <span className=' text-gray-400'>{item.paymentMethod}</span></p>
+                  <p>总额: {currency}{item.price * item.quantity}.00</p>
+                  <p className='mt-1'>下单日期: <span className='text-gray-400'>{new Date(item.date).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
+                  <p className='mt-1'>付款方式: <span className=' text-gray-400'>{item.paymentMethod === 'COD' ? '货到付款' : ''}</span></p>
                 </div>
               </div>
               <div className='md:w-1/2 flex justify-between'>
                 <div className='flex items-center gap-2'>
                   <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                  <p className='text-sm md:text-base'>{item.status}</p>
+                  <p className='text-sm md:text-base'>{item.status && '下单成功'}</p>
                 </div>
                 {/* <button onClick={loadOrderData} className='border px-4 py-2 text-sm font-medium rounded-sm'>Track Order</button> */}
               </div>

@@ -37,7 +37,8 @@ const Footer = () => {
 
       <div>
         <hr />
-        <p className='py-5 text-sm text-center'>Copyright 2024 &copy; 幸蚁国际 - All Right Reserved.</p>
+        <p className='py-5 text-sm text-center'>知识产权 
+          {new Date().getFullYear()} &copy; 幸蚁国际 - 版权所有</p>
       </div>
 
     </div>
