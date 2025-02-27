@@ -25,7 +25,9 @@ const Footer = () => {
               </NavLink>
             </li> */}
             <li>
-              <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>订单</p>
+              <NavLink to='/orders'>
+                <p>订单</p>
+              </NavLink>
             </li>
             {/* <li>
               <NavLink to='/contact'>
@@ -37,7 +39,7 @@ const Footer = () => {
 
       <div>
         <hr />
-        <p className='py-5 text-sm text-center'>知识产权 
+        <p className='py-5 text-sm text-center'>知识产权
           {new Date().getFullYear()} &copy; 幸蚁国际 - 版权所有</p>
       </div>
 

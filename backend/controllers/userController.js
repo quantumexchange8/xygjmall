@@ -17,7 +17,7 @@ const loginUser = async (req, res) => {
         const user = await userModel.findOne({ email });
 
         if (!user) {
-            return res.json({ success: false, message: "User doesn't exists" })
+            return res.json({ success: false, message: "用户不存在" })
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
@@ -25,11 +25,17 @@ const loginUser = async (req, res) => {
         if (isMatch) {
 
             const token = createToken(user._id)
-            res.json({ success: true, token })
+            res.json({
+                success: true, token, user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                }
+            })
 
         }
         else {
-            res.json({ success: false, message: 'Invalid credentials' })
+            res.json({ success: false, message: '无效登入' })
         }
 
     } catch (error) {
@@ -47,15 +53,15 @@ const registerUser = async (req, res) => {
         // checking user already exists or not
         const exists = await userModel.findOne({ email });
         if (exists) {
-            return res.json({ success: false, message: "User already exists" })
+            return res.json({ success: false, message: "用户已注册" })
         }
 
         // validating email format & strong password
         if (!validator.isEmail(email)) {
-            return res.json({ success: false, message: "Please enter a valid email" })
+            return res.json({ success: false, message: "请输入有效邮箱地址" })
         }
         if (password.length < 8) {
-            return res.json({ success: false, message: "Please enter a strong password" })
+            return res.json({ success: false, message: "密码长度不可少于8位" })
         }
 
         // hashing user password
@@ -83,14 +89,14 @@ const registerUser = async (req, res) => {
 // Route for admin login
 const adminLogin = async (req, res) => {
     try {
-        
-        const {email,password} = req.body
+
+        const { email, password } = req.body
 
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign(email+password,process.env.JWT_SECRET);
-            res.json({success:true,token})
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.json({ success: true, token })
         } else {
-            res.json({success:false,message:"Invalid credentials"})
+            res.json({ success: false, message: "Invalid credentials" })
         }
 
     } catch (error) {

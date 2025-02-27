@@ -21,7 +21,7 @@ const ShopContextProvider = (props) => {
     const addToCart = async (itemId, quantity) => {
 
         if (!quantity) {
-            toast.error('Select Quantity');
+            toast.error('请选择数量');
             return;
         }
 
@@ -35,6 +35,8 @@ const ShopContextProvider = (props) => {
             cartData[itemId] = quantity;
         }
         setCartItems(cartData);
+
+        toast.success('成功加入购物车');
 
         if (token) {
             try {
@@ -53,13 +55,10 @@ const ShopContextProvider = (props) => {
             try {
                 if (Object.keys(cartItems).length > 0) {
                     totalCount = Object.keys(cartItems).length;
-                    console.log('cartItems has items:', Object.keys(cartItems).length);
                 }
             } catch (error) {
             }
         }
-        console.log('cartItems has items:', cartItems);
-        console.log('cartItems total count', totalCount);
         return totalCount;
     }
 
