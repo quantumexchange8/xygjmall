@@ -45,6 +45,39 @@ const loginUser = async (req, res) => {
     }
 }
 
+// Route for user update
+const updateUser = async (req, res) => {
+    try {
+        const { id, name, email, telNum, address } = req.body;
+
+        const user = await userModel.findById(id);
+
+        if (!user) {
+            return res.json({ success: false, message: "用户不存在" })
+        } else {
+            if (name) user.name = name;
+            if (email) user.email = email;
+            if (telNum) user.telNum = telNum;
+            if (address) user.address = address;
+
+            await user.save();
+            res.json({
+                success: true, user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    address: user.address,
+                    telNum: user.telNum
+                }
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message })
+    }
+}
+
 // Route for user register
 const registerUser = async (req, res) => {
     try {
@@ -117,4 +150,4 @@ const adminLogin = async (req, res) => {
 }
 
 
-export { loginUser, registerUser, adminLogin }
+export { loginUser, registerUser, adminLogin, updateUser }

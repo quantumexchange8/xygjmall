@@ -29,7 +29,6 @@ const Login = () => {
         }
 
       } else {
-
         const response = await axios.post(backendUrl + '/api/user/login', { email, password })
         if (response.data.success) {
           setToken(response.data.token)
@@ -38,9 +37,7 @@ const Login = () => {
         } else {
           toast.error(response.data.message)
         }
-
       }
-
 
     } catch (error) {
       console.log(error)
@@ -70,7 +67,7 @@ const Login = () => {
           <input onChange={(e) => setTelNum(e.target.value)} value={telNum} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='手机号码' required />
         </>
       }
-      <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='邮件箱' required />
+      <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='邮箱' required />
       <input onChange={(e) => setPasword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='密码' required />
       <div className='w-full flex justify-between text-sm mt-[-8px]'>
         {
