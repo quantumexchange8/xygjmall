@@ -11,13 +11,15 @@ const Login = () => {
   const [name, setName] = useState('')
   const [password, setPasword] = useState('')
   const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [telNum, setTelNum] = useState('')
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
       if (currentState === '创建账号') {
 
-        const response = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+        const response = await axios.post(backendUrl + '/api/user/register', { name, address, telNum, email, password })
         if (response.data.success) {
           setToken(response.data.token)
           localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -58,7 +60,16 @@ const Login = () => {
         <p className='prata-regular text-3xl'>{currentState}</p>
         <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
       </div>
-      {currentState === '登入' ? '' : <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='姓名' required />}
+      {currentState === '登入'
+        ?
+        ''
+        :
+        <>
+          <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='姓名' required />
+          <input onChange={(e) => setAddress(e.target.value)} value={address} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='详细住址' required />
+          <input onChange={(e) => setTelNum(e.target.value)} value={telNum} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='手机号码' required />
+        </>
+      }
       <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='邮件箱' required />
       <input onChange={(e) => setPasword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='密码' required />
       <div className='w-full flex justify-between text-sm mt-[-8px]'>

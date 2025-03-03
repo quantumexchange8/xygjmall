@@ -3,7 +3,6 @@ import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import userModel from "../models/userModel.js";
 
-
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET)
 }
@@ -30,6 +29,8 @@ const loginUser = async (req, res) => {
                     id: user._id,
                     name: user.name,
                     email: user.email,
+                    address: user.address,
+                    telNum: user.telNum
                 }
             })
 
@@ -48,7 +49,7 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
     try {
 
-        const { name, email, password } = req.body;
+        const { name, address, telNum, email, password } = req.body;
 
         // checking user already exists or not
         const exists = await userModel.findOne({ email });
@@ -71,6 +72,8 @@ const registerUser = async (req, res) => {
         const newUser = new userModel({
             name,
             email,
+            address,
+            telNum,
             password: hashedPassword
         })
 
@@ -83,6 +86,8 @@ const registerUser = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
+                address: user.address,
+                telNum: user.telNum
             }
         })
 

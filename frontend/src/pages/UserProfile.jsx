@@ -34,6 +34,8 @@ const UserProfile = () => {
                 <div className="text-center mt-5">
                     <h1 className="text-xl font-semibold text-gray-700">{user.name}</h1>
                     <p className="text-gray-500">{user.email}</p>
+                    <p className="text-gray-500">{user.telNum}</p>
+                    <p className="text-gray-500">{user.address}</p>
                 </div>
                 <div className="mt-6 flex justify-around">
                     <button className="bg-gray-300 text-gray-700 py-2 px-4 hover:bg-gray-400" onClick={logout}>退出</button>
