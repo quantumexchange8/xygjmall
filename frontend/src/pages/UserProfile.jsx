@@ -31,7 +31,14 @@ const UserProfile = () => {
                 if (response.data.success) {
                     localStorage.setItem('user', JSON.stringify(response.data.user));
 
-                    window.location.reload();
+                    toast.success("个人资料更换成功");
+
+
+                    setTimeout(
+                        () => {
+                            window.location.reload();
+                        }, 3000
+                    )
                 } else {
                     toast.error(response.data.message)
                 }
